@@ -14,7 +14,7 @@
 | **8 Octobre 2025**      | Entretien + rencontre équipe complète                 |
 | **Oct-Déc 2025**        | Acceptation offre + démarches permis travail          |
 | **Déc 2025 - Jan 2026** | Audit technique préparatoire (pendant attente permis) |
-| **Janvier 2026**        | 🚀 Début officiel mission                             |
+| **Mars 2026**           | 🚀 Début officiel mission                            |
 | **[À définir]**         | Fin permis → Déménagement Toronto                     |
 
 ---
