@@ -21,7 +21,7 @@
 
 ---
 
-## 2. Toi — Software Engineer (Solo Developer)
+## 2. Moi — Software Engineer (Solo Developer)
 
 **Rôle** : Couche applicative complète (frontend + intégrations backend).
 

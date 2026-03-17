@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "04-Daily-Logs/03 - Mars/2026-03-16.md.md",
+                "file": "04-Daily-Logs/03 - Mars/2026-03-17.md.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-03-16.md"
+              "title": "2026-03-17.md"
             }
           }
         ]
@@ -185,16 +185,21 @@
   },
   "active": "f8a73a1f39a04dd6",
   "lastOpenFiles": [
-    "04-Daily-Logs/03 - Mars/2026-03-13.md.md",
     "04-Daily-Logs/03 - Mars/2026-03-16.md.md",
+    "04-Daily-Logs/03 - Mars/2026-03-13.md.md",
     "04-Daily-Logs/03 - Mars/2026-03-12.md.md",
-    "04-Daily-Logs/02 - Février/2026-02-02.md.md",
-    "01-Context/team-structure.md",
-    "01-Context/mission-overview.md",
-    "04-Daily-Logs/Mars/2026-03-13.md.md",
     "04-Daily-Logs/03 - Mars/2026-03-11.md.md",
     "04-Daily-Logs/03 - Mars/2026-03-10.md.md",
     "04-Daily-Logs/03 - Mars/2026-03-09.md.md",
+    "04-Daily-Logs/03 - Mars/2026-03-17.md.md",
+    "07-Skills-Growth/architecture.md",
+    "02-Projects/infrastructure-audit.md",
+    "01-Context/tech-stack.md",
+    "01-Context/tech-notes-draft.md",
+    "01-Context/team-structure.md",
+    "01-Context/mission-overview.md",
+    "04-Daily-Logs/02 - Février/2026-02-02.md.md",
+    "04-Daily-Logs/Mars/2026-03-13.md.md",
     "04-Daily-Logs/03 - Mars",
     "04-Daily-Logs/02 - Février",
     "04-Daily-Logs/Avril",
@@ -205,17 +210,12 @@
     "04-Daily-Logs/Février/2026-02-02.md.md",
     "04-Daily-Logs/Mars",
     "04-Daily-Logs/Février",
-    "01-Context/tech-notes-draft.md",
-    "01-Context/tech-stack.md",
     "04-Daily-Logs/2026-03-10.md",
-    "02-Projects/infrastructure-audit.md",
     "Home.md/Welcome.md",
-    "07-Skills-Growth/architecture.md",
     "07-Skills-Growth/leadership.md",
     "06-Wins/impact-metrics.md",
     "06-Wins/problem-solving.md",
     "05-Red-Flags/security-concerns.md",
-    "05-Red-Flags/process-issues.md",
     "07-Skills-Growth",
     "06-Wins",
     "05-Red-Flags",
