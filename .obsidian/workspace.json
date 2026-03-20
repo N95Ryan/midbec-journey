@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "04-Daily-Logs/03 - Mars/2026-03-19.md.md",
+                "file": "04-Daily-Logs/03 - Mars/2026-03-20.md.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-03-19.md"
+              "title": "2026-03-20.md"
             }
           }
         ]
@@ -185,8 +185,9 @@
   },
   "active": "f8a73a1f39a04dd6",
   "lastOpenFiles": [
-    "04-Daily-Logs/03 - Mars/2026-03-18.md.md",
     "04-Daily-Logs/03 - Mars/2026-03-19.md.md",
+    "04-Daily-Logs/03 - Mars/2026-03-20.md.md",
+    "04-Daily-Logs/03 - Mars/2026-03-18.md.md",
     "04-Daily-Logs/03 - Mars/2026-03-17.md.md",
     "04-Daily-Logs/03 - Mars/2026-03-16.md.md",
     "04-Daily-Logs/03 - Mars/2026-03-13.md.md",
@@ -215,7 +216,6 @@
     "04-Daily-Logs/2026-03-10.md",
     "Home.md/Welcome.md",
     "07-Skills-Growth/leadership.md",
-    "06-Wins/impact-metrics.md",
     "07-Skills-Growth",
     "06-Wins",
     "05-Red-Flags",
