@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "04-Daily-Logs/03 - Mars/2026-03-31.md.md",
+                "file": "04-Daily-Logs/04 - Avril/2026-04-01.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-03-31.md"
+              "title": "2026-04-01"
             }
           }
         ]
@@ -185,8 +185,11 @@
   },
   "active": "f8a73a1f39a04dd6",
   "lastOpenFiles": [
-    "04-Daily-Logs/03 - Mars/2026-03-30.md.md",
     "04-Daily-Logs/03 - Mars/2026-03-31.md.md",
+    "04-Daily-Logs/04 - Avril/2026-04-01.md",
+    "04-Daily-Logs/04 - Avril",
+    "04-Daily-Logs/04 - Av",
+    "04-Daily-Logs/03 - Mars/2026-03-30.md.md",
     "04-Daily-Logs/03 - Mars/2026-03-27.md.md",
     "04-Daily-Logs/03 - Mars/2026-03-26.md.md",
     "04-Daily-Logs/03 - Mars/2026-03-25.md.md",
@@ -213,13 +216,10 @@
     "04-Daily-Logs/03 - Mars",
     "04-Daily-Logs/02 - Février",
     "04-Daily-Logs/Avril",
-    "04-Daily-Logs/Mars/2026-03-12.md.md",
     "04-Daily-Logs/Mars",
     "04-Daily-Logs/Février",
     "07-Skills-Growth",
     "06-Wins",
-    "05-Red-Flags",
-    "04-Daily-Logs",
-    "03-Technical-Decisions/security"
+    "05-Red-Flags"
   ]
 }
