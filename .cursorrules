@@ -1,0 +1,90 @@
+# Obsidian Daily Logs — Règles Cursor
+
+## Format obligatoire pour toute note daily log
+
+Chaque note générée ou modifiée dans `03-Daily-Logs/` doit respecter
+strictement ce format, dans cet ordre :
+
+---
+
+# 📅 Jour Mois Année — Titre court de la journée
+
+## 🧠 Humeur & contexte
+
+État d'esprit général, anecdote légère du quotidien.
+✅ Autorisé : énergie du jour, contexte de travail, observation légère
+❌ Interdit : montants financiers, situations familiales, démarches
+administratives personnelles, frustrations intimes
+
+---
+
+## 🎯 Objectifs du jour
+
+- [ ] Objectif 1
+- [ ] Objectif 2
+
+---
+
+## 💡 Découverte du jour
+
+Veille tech, outil découvert, observation métier, réflexe nouveau.
+Si rien à signaler : écrire exactement → Pas de découverte particulière.
+
+---
+
+## ✅ Réalisations
+
+### [Nom du scope] — [résumé en 3 mots]
+*[Une phrase de contexte : pourquoi ce scope, quel objectif.]*
+
+- [action] — [intention lisible hors contexte]
+- [action] — [intention lisible hors contexte]
+
+---
+
+## 🧠 Ce que j'ai appris
+
+- **[Principe ou réflexe]** : [explication concrète, généralisable à
+  d'autres contextes]
+
+---
+
+## ⚠️ Points de vigilance
+
+- [Dette technique ou point ouvert] — [ce qu'il faudra faire et quand]
+
+---
+
+## ⏭️ Next steps
+
+- [Tâche concrète]
+
+---
+
+## ⚡ Énergie
+
+[Une phrase descriptive : état général + ce qui a été livré.
+Pas de note chiffrée (pas de X/10).]
+
+---
+
+## Règles de rédaction
+
+- Bullets réalisations : toujours [action] — [intention]. L'intention
+  doit être compréhensible sans contexte du projet.
+- Learnings : toujours **Principe en gras** suivi du deux-points et
+  d'une explication généralisable.
+- Ne jamais inventer de contenu technique absent des informations fournies.
+- Toujours restructurer, jamais réécrire le contenu existant.
+
+## Format de commit pour les notes Obsidian
+
+git add .
+git commit -m "Ajout de la note du JOUR MOIS ANNÉE"
+
+Exemples :
+git add .
+git commit -m "Ajout de la note du 7 avril 2026"
+
+git add .
+git commit -m "Ajout de la note du 8 avril 2026"
