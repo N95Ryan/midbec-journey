@@ -15,4 +15,4 @@
 
 ---
 
-**Liens** : [[mission]] · [[stack]] · [[ryan]] · [[charles-etienne]]
+**Liens** : [[mission]] · [[stack]] · [[ryan]]

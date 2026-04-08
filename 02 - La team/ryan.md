@@ -2,28 +2,28 @@
 
 **Rôle** : Couche applicative complète (frontend + intégrations backend).
 
-### Responsabilités
-- **Frontend** : migration PHP 5.6 → React, UI/UX, performances, SEO, accessibilité
-- **Backend / intégrations** : API ERP Ogasys, API intermédiaire Python, garanties Whirlpool
-- **Architecture** : choix stack, stratégie de migration, scalabilité (500k → 600k+ pièces)
-- **Qualité & process** : documentation, tests, transition progressive, zéro downtime
+## Responsabilités
 
-### Collaboration
-- **Avec Patrick** : infra, déploiements, sécurité, environnements
-- **Avec équipes internes** : recueil besoins, priorisation, tests utilisateurs, formation
-
----
+- Ownership complet de la couche applicative : architecture,
+  choix techniques, implémentation, maintenance
+- Refonte frontend intégrale : UI/UX, composants réutilisables,
+  responsive, performances, SEO et accessibilité
+- Conception et développement de l'API Go (Gin) :
+  intégration ERP Ogasys, catalogue 500k → 2M pièces,
+  pagination, filtres, recherche performante
+- Mise en place CI/CD et bonnes pratiques qualité
+- Migration progressive sans interruption de service
+- Collaboration étroite avec Patrick sur les environnements,
+  déploiements et sécurité
 
 ## Relation de travail
 
-| Aspect            | Patrick (Admin Sys)     | Ryan (Solo Dev)              |
-| ----------------- | ----------------------- | --------------------------- |
-| Périmètre         | Infra, sécurité, Ops    | App, frontend, intégrations |
-| Décisions         | Conjointes (technique)  | Conjointes (technique)      |
-| Livrables communs | Environnements, CI/CD   | App déployable, monitoring  |
-
-**Objectif** : une seule équipe technique (dev + ops) pour livrer et maintenir le nouveau site.
+| Aspect | Patrick (Admin Sys) | Ryan (Solo Dev) |
+|---|---|---|
+| Périmètre | Infra, sécurité, Ops | App, frontend, intégrations |
+| Décisions | Conjointes (technique) | Conjointes (technique) |
+| Livrables communs | Environnements, CI/CD | App déployable |
 
 ---
 
-**Liens** : [[mission]] · [[stack]] · [[patrick]] · [[charles-etienne]]
+**Liens** : [[mission]] · [[stack]] · [[patrick]]
