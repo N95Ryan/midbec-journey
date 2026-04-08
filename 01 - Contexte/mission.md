@@ -8,14 +8,12 @@
 
 ## 📅 Timeline
 
-
-| Date             | Événement                                     |
-| ---------------- | --------------------------------------------- |
-| **Octobre 2025** | Entretien + rencontre équipe                  |
+| Date | Événement |
+|---|---|
+| **Octobre 2025** | Entretien + rencontre équipe |
 | **Oct–Déc 2025** | Acceptation offre + démarches administratives |
-| **Février 2026** | Audit technique préparatoire                  |
-| **Mars 2026**    | 🚀 Début officiel                             |
-
+| **Février 2026** | Audit technique préparatoire |
+| **Mars 2026** | 🚀 Début officiel |
 
 ---
 
@@ -33,32 +31,17 @@ pour un catalogue en croissance de 500k vers 2 millions de pièces.
 ## 🔧 Responsabilités
 
 - Ownership complet de la couche applicative : architecture,
-choix techniques, implémentation, maintenance
-
-
-
+  choix techniques, implémentation, maintenance
 - Refonte frontend intégrale : UI/UX, composants réutilisables,
-responsive, performances, SEO et accessibilité
-
-
-
+  responsive, performances, SEO et accessibilité
 - Conception et développement de l'API Go (Gin) :
-intégration ERP Ogasys, gestion d'un catalogue 500k → 2M pièces,
-pagination, filtres, recherche performante
-
-
-
+  intégration ERP Ogasys, gestion d'un catalogue 500k → 2M pièces,
+  pagination, filtres, recherche performante
 - Mise en place d'un workflow CI/CD et des bonnes pratiques
-de qualité (tests, revue, documentation)
-
-
-
+  de qualité (tests, revue, documentation)
 - Migration progressive sans interruption de service
-
-
-
 - Collaboration étroite avec Patrick (infra/DevOps) sur
-les environnements, déploiements et sécurité
+  les environnements, déploiements et sécurité
 
 ---
 
@@ -73,4 +56,3 @@ les environnements, déploiements et sécurité
 
 - [[stack]] — Stack technique
 - [[patrick]] · [[ryan]] — Équipe
-
