@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/profile.jpg" alt="Ryan Pina-Silasse" width="220" style="border-radius:50%" />
+  <img src="assets/profile.jpg" alt="Ryan Pina-Silasse" width="500" style="border-radius:50%" />
 
   # 🧭 My Midbec Journey
 
