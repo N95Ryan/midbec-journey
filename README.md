@@ -1,12 +1,13 @@
+<div align="center">
+  <img src="assets/profile.jpg" alt="Ryan Pina-Silasse" width="160" style="border-radius:50%" />
 
+  # 🧭 My Midbec Journey
 
-# 🧭 My Midbec journey
+  **A public engineering journal documenting a solo platform modernization**
+  *from legacy infrastructure to a modern full-stack architecture — one scope at a time*
 
-  **A public engineering journal documenting a solo platform modernization** *from legacy infrastructure to a modern full-stack architecture. One scope at a time*
-
-  [LinkedIn](https://www.linkedin.com/in/ryan-pina-silasse/)
-
-
+  [![LinkedIn](https://img.shields.io/badge/LinkedIn-Ryan%20Pina--Silasse-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ryan-pina-silasse/)
+</div>
 
 ---
 
@@ -15,7 +16,6 @@
 Midbec is a Canadian industrial parts distributor based in Drummondville, QC. I joined as the **sole developer** with one objective: modernize a platform that hadn't changed in decades.
 
 The scale:
-
 - **500K → 2M+ parts** in the product catalog
 - **Zero existing frontend architecture** — starting from scratch
 - **One developer** — full ownership over architecture, stack decisions, and delivery
@@ -26,16 +26,14 @@ This repo is where I document the journey publicly, day by day.
 
 ## 📊 Impact (in progress)
 
-
-| Metric                    | Before     | After |
-| ------------------------- | ---------- | ----- |
-| Lighthouse Performance    | 55         | TBD   |
-| Lighthouse Accessibility  | 71         | TBD   |
-| Lighthouse Best Practices | 96         | TBD   |
-| Lighthouse SEO            | 100        | TBD   |
-| First Contentful Paint    | 2.5s       | TBD   |
-| Total Blocking Time       | 4,380ms ⚠️ | TBD   |
-
+| Metric | Before | After |
+|---|---|---|
+| Lighthouse Performance | 55 | TBD |
+| Lighthouse Accessibility | 71 | TBD |
+| Lighthouse Best Practices | 96 | TBD |
+| Lighthouse SEO | 100 | TBD |
+| First Contentful Paint | 2.5s | TBD |
+| Total Blocking Time | 4,380ms ⚠️ | TBD |
 
 > Baseline measured pre-Bootstrap/SCSS removal. Scores will be updated post-migration.
 
@@ -52,39 +50,34 @@ midbec-journey/
 ```
 
 **Recommended reading order:**
-
-1. `[01 - Context/](./01%20-%20Context/)` — understand the mission and constraints
-2. Pick any daily log in `[03 - Daily Logs/](./03%20-%20Daily%20Logs/)` — see the work in practice
+1. [`01 - Context/`](./01%20-%20Context/) — understand the mission and constraints
+2. Pick any daily log in [`03 - Daily Logs/`](./03%20-%20Daily%20Logs/) — see the work in practice
 3. Check the scopes table below — track overall progress
 
 ---
 
 ## 🔄 Delivery Scopes
 
-
-| #   | Scope                                                               | Status         |
-| --- | ------------------------------------------------------------------- | -------------- |
-| 1   | Homepage components (Header, Footer, Slider, Featured Products…)    | ✅ Done         |
-| 2   | Tailwind CSS migration — SCSS/Bootstrap removal (homepage layer)    | ✅ Done         |
-| 3   | Mobile responsive — hamburger menu, full mobile component migration | ✅ Done         |
-| 4   | Auth end-to-end (Next.js ↔ Go API, session hydration, CORS proxy)   | ✅ Done         |
-| 5   | Account dashboard (addresses, orders, invoices, profile, password)  | 🔄 In progress |
-
+| # | Scope | Status |
+|---|---|---|
+| 1 | Homepage components (Header, Footer, Slider, Featured Products…) | ✅ Done |
+| 2 | Tailwind CSS migration — SCSS/Bootstrap removal (homepage layer) | ✅ Done |
+| 3 | Mobile responsive — hamburger menu, full mobile component migration | ✅ Done |
+| 4 | Auth end-to-end (Next.js ↔ Go API, session hydration, CORS proxy) | ✅ Done |
+| 5 | Account dashboard (addresses, orders, invoices, profile, password) | 🔄 In progress |
 
 ---
 
 ## 🛠️ Stack
 
-
-| Layer         | Tech                                                                  |
-| ------------- | --------------------------------------------------------------------- |
-| Frontend      | Next.js 15 (App Router) · React 19 · TypeScript 5.8 · Tailwind CSS v4 |
-| Backend       | Go · Gin · PostgreSQL                                                 |
-| PIM           | UnoPIM                                                                |
-| Data fetching | TanStack Query v5                                                     |
-| i18n          | react-intl (FR / EN)                                                  |
-| Infra         | LXC containers · GitLab CI/CD                                         |
-
+| Layer | Tech |
+|---|---|
+| Frontend | Next.js 15 (App Router) · React 19 · TypeScript 5.8 · Tailwind CSS v4 |
+| Backend | Go · Gin · PostgreSQL |
+| PIM | UnoPIM |
+| Data fetching | TanStack Query v5 |
+| i18n | react-intl (FR / EN) |
+| Infra | LXC containers · GitLab CI/CD |
 
 ---
 
@@ -118,9 +111,10 @@ A few principles that show up repeatedly across the logs:
 
 ---
 
+<div align="center">
 
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Ryan%20Pina--Silasse-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ryan-pina-silasse/)
 
-[LinkedIn](https://www.linkedin.com/in/ryan-pina-silasse/)
+*Drummondville, QC → Toronto 🇨🇦*
 
-*Drummondville, QC*
-
+</div>
