@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/profile.jpg" alt="Ryan Pina-Silasse" width="160" style="border-radius:50%" />
+  <img src="assets/profile.jpg" alt="Ryan Pina-Silasse" width="220" style="border-radius:50%" />
 
   # 🧭 My Midbec Journey
 
@@ -115,6 +115,6 @@ A few principles that show up repeatedly across the logs:
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Ryan%20Pina--Silasse-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ryan-pina-silasse/)
 
-*Drummondville, QC → Toronto 🇨🇦*
+*Drummondville, QC*
 
 </div>
