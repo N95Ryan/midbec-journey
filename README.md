@@ -74,11 +74,11 @@ midbec-journey/
 | Layer | Tech |
 |---|---|
 | Frontend | Next.js 15 (App Router) · React 19 · TypeScript 5.8 · Tailwind CSS v4 |
-| Backend | Go · Gin · PostgreSQL |
+| Backend | Go · Chi · PostgreSQL |
 | PIM | UnoPIM |
 | Data fetching | TanStack Query v5 |
 | i18n | react-intl (FR / EN) |
-| Infra | LXC containers · GitLab CI/CD |
+| Infra | LXC containers |
 
 ---
 
