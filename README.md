@@ -3,8 +3,8 @@
 
   # 🧭 My Midbec Journey
 
-  **A public engineering journal documenting a solo platform modernization**
-  *from legacy infrastructure to a modern full-stack architecture — one scope at a time*
+  A public engineering journal documenting a solo platform modernization from legacy infrastructure to a modern full-stack architecture. 
+  One scope at a time.
 
   [![LinkedIn](https://img.shields.io/badge/LinkedIn-Ryan%20Pina--Silasse-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ryan-pina-silasse/)
 </div>
