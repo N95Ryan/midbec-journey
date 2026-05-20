@@ -1,3 +1,4 @@
+
 <div align="center">
   <img src="assets/profile.jpg" alt="Ryan Pina-Silasse" width="500" style="border-radius:50%" />
 
@@ -65,7 +66,11 @@ midbec-journey/
 | 2 | Tailwind CSS migration — SCSS/Bootstrap removal (homepage layer) | ✅ Done |
 | 3 | Mobile responsive — hamburger menu, full mobile component migration | ✅ Done |
 | 4 | Auth end-to-end (Next.js ↔ Go API, session hydration, CORS proxy) | ✅ Done |
-| 5 | Account dashboard (addresses, orders, invoices, profile, password) | 🔄 In progress |
+| 5 | Account dashboard (addresses, orders, invoices, profile, password) | ✅ Done |
+| 6 | i18n routing — bilingual URLs (FR/EN) with next-intl | ✅ Done |
+| 7 | Garage/Vehicle feature removal — full cleanup | ✅ Done |
+| 8 | PartSmart integration — model search, IPL exploded view, cart | ✅ Done |
+| 9 | Unified header search — model + part autocomplete, Google-style | 🔄 In progress |
 
 ---
 
@@ -78,7 +83,8 @@ midbec-journey/
 | PIM | UnoPIM |
 | Data fetching | TanStack Query v5 |
 | i18n | react-intl (FR / EN) |
-| Infra | LXC containers |
+| Infra | LXC containers · GitLab CI/CD |
+| Package manager | Bun |
 
 ---
 

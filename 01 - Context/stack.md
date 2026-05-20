@@ -24,7 +24,7 @@
 
 | Technologie | Rôle                                        |
 | ----------- | ------------------------------------------- |
-| Go + Gin    | API layer — appels vers ERP Ogasys          |
+| Go + Chi    | API layer — handlers → services → repositories |
 | PostgreSQL  | Base de données                             |
 | UnoPIM      | Source de vérité produit (géré par Patrick) |
 
@@ -36,11 +36,11 @@
 ## 🔌 Intégrations externes
 
 
-| Système    | Rôle                       | Accès                            |
-| ---------- | -------------------------- | -------------------------------- |
-| ERP Ogasys | Inventaire (~500k pièces)  | Lecture via Go API               |
-| ETL Python | Transformation données ERP | Boîte noire — pas de main dessus |
-| Cloudflare | CDN / DNS                  | Géré par Patrick                 |
+| Système    | Rôle                                      | Accès              |
+| ---------- | ----------------------------------------- | ------------------ |
+| ERP Ogasys | Inventaire — catalogue pièces             | Lecture via Go API |
+| PartSmart  | Catalogue modèles + IPL (LeadVenture)     | Via Go proxy       |
+| Cloudflare | CDN / DNS                                 | Géré par Patrick   |
 
 
 ---

@@ -34,7 +34,7 @@ pour un catalogue en croissance de 500k vers 2 millions de pièces.
   choix techniques, implémentation, maintenance
 - Refonte frontend intégrale : UI/UX, composants réutilisables,
   responsive, performances, SEO et accessibilité
-- Conception et développement de l'API Go (Gin) :
+- Conception et développement de l'API Go (Chi) :
   intégration ERP Ogasys, gestion d'un catalogue 500k → 2M pièces,
   pagination, filtres, recherche performante
 - Mise en place d'un workflow CI/CD et des bonnes pratiques
@@ -47,7 +47,7 @@ pour un catalogue en croissance de 500k vers 2 millions de pièces.
 
 ## 👥 Équipe
 
-- **Ryan** — Solo developer, couche applicative complète
+- **Ryan** — Ingénieur Fullstack, couche applicative complète
 - **Patrick** — Admin sys / DevOps, infrastructure et déploiements
 
 ---

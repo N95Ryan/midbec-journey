@@ -1,6 +1,6 @@
 # 👤 Ryan — Software Engineer (Solo Developer)
 
-**Rôle** : Couche applicative complète (frontend + intégrations backend).
+**Rôle** : Couche applicative fullstack complète.
 
 ## Responsabilités
 
@@ -8,7 +8,7 @@
   choix techniques, implémentation, maintenance
 - Refonte frontend intégrale : UI/UX, composants réutilisables,
   responsive, performances, SEO et accessibilité
-- Conception et développement de l'API Go (Gin) :
+- Conception et développement de l'API Go (Chi) :
   intégration ERP Ogasys, catalogue 500k → 2M pièces,
   pagination, filtres, recherche performante
 - Mise en place CI/CD et bonnes pratiques qualité
@@ -18,7 +18,7 @@
 
 ## Relation de travail
 
-| Aspect | Patrick (Admin Sys) | Ryan (Solo Dev) |
+| Aspect | Patrick (Admin Sys) | Ryan (Ingénieur Fullstack) |
 |---|---|---|
 | Périmètre | Infra, sécurité, Ops | App, frontend, intégrations |
 | Décisions | Conjointes (technique) | Conjointes (technique) |

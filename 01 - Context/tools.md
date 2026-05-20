@@ -14,5 +14,6 @@
 ## Notes & Documentation
 
 - Obsidian — daily logs (vault `Midbec-Journey`, sync GitHub)
-- Notion — résumés mensuels
+- Notion — suivi des scopes (MCP intégré)
+- CodeRabbit — revue de code automatisée (Pro Plus, assertive)
 
