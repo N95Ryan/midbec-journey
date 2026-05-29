@@ -28,6 +28,7 @@
 | PostgreSQL  | Base de données                             |
 | UnoPIM      | Source de vérité produit (géré par Patrick) |
 
+Voir la feuille de route détaillée : [unopim-roadmap.md](./unopim-roadmap.md)
 
 **Architecture Go :** handlers → services → repositories
 
