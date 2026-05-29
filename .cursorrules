@@ -77,6 +77,23 @@ Pas de note chiffrée (pas de X/10).]
 - Ne jamais inventer de contenu technique absent des informations fournies.
 - Toujours restructurer, jamais réécrire le contenu existant.
 
+## Données interdites dans les logs publics
+
+❌ **Jamais écrire :**
+- Secrets, tokens, mots de passe, ou fragments d'identifiants OAuth
+- Emails (collègues, clients, comptes de test)
+- Valeurs de variables d'environnement (`.env`, `.env.local`)
+
+✅ **Autorisé :**
+- Noms des collègues et partenaires (sans leurs emails)
+- Noms de variables d'environnement (`PIM_CLIENT_ID`, etc.)
+- `localhost` et endpoints locaux en contexte dev
+- Notes d'humeur et contexte quotidien (voir section Humeur)
+
+**Règle de remplacement :** privilégier le contexte et le learning plutôt que
+le détail sensible (ex. « email placé par erreur dans client_id » plutôt que
+l'adresse réelle).
+
 ## Format de commit pour les notes Obsidian
 
 git add .

@@ -45,16 +45,20 @@ This repo is where I document the journey publicly, day by day.
 
 ```
 midbec-journey/
-├── 01 - Context/       # Start here — mission overview, stack, architecture decisions
-├── 02 - The Team/      # Collaborators, roles, working dynamics
-├── 03 - Daily Logs/    # Day-by-day engineering log (YYYY-MM/YYYY-MM-DD.md)
-└── .cursorrules        # Enforces consistent note format across the vault
+├── 01 - Context/
+│   ├── mission.md
+│   ├── stack.md
+│   └── unopim-roadmap.md   # UnoPIM integration roadmap (Cursor reference)
+├── 02 - The Team/          # Collaborators, roles, working dynamics
+├── 03 - Daily Logs/        # Day-by-day engineering log (YYYY-MM/YYYY-MM-DD.md)
+└── .cursorrules            # Enforces consistent note format across the vault
 ```
 
 **Recommended reading order:**
-1. [`01 - Context/`](./01%20-%20Context/) — understand the mission and constraints
-2. Pick any daily log in [`03 - Daily Logs/`](./03%20-%20Daily%20Logs/) — see the work in practice
-3. Check the scopes table below — track overall progress
+1. [`01 - Context/`](./01%20-%20Context/) — mission, stack, and architecture decisions
+2. [`unopim-roadmap.md`](./01%20-%20Context/unopim-roadmap.md) — current catalogue integration (UnoPIM)
+3. Pick any daily log in [`03 - Daily Logs/`](./03%20-%20Daily%20Logs/) — see the work in practice
+4. Check the scopes table below — track overall progress
 
 ---
 
@@ -71,16 +75,24 @@ midbec-journey/
 | 7 | Garage/Vehicle feature removal — full cleanup | ✅ Done |
 | 8 | PartSmart integration — model search, IPL exploded view, cart | ✅ Done |
 | 9 | Unified header search — model + part autocomplete, Google-style | 🔄 In progress |
+| 10 | UnoPIM — OAuth2 auth, category cache, Go proxy | ✅ Done |
+| 11 | UnoPIM — category tree, icons, dynamic catalogue menu | ✅ Done |
+| 12 | UnoPIM — product listing + unified navigation + drill-down panel | ✅ Done |
+| 13 | UnoPIM — header search | ⏳ Planned |
+
+> Scopes 10–13 map to steps 0→4 in [`unopim-roadmap.md`](./01%20-%20Context/unopim-roadmap.md).
 
 ---
 
 ## 🛠️ Stack
 
+Full details in [`stack.md`](./01%20-%20Context/stack.md).
+
 | Layer | Tech |
 |---|---|
 | Frontend | Next.js 15 (App Router) · React 19 · TypeScript 5.8 · Tailwind CSS v4 |
 | Backend | Go · Chi · PostgreSQL |
-| PIM | UnoPIM |
+| PIM | UnoPIM (product source of truth) |
 | Data fetching | TanStack Query v5 |
 | i18n | react-intl (FR / EN) |
 | Infra | LXC containers · GitLab CI/CD |
@@ -113,8 +125,12 @@ A few principles that show up repeatedly across the logs:
 ## 📝 Notes
 
 - Logs are written in French (my working language at Midbec)
-- No internal tooling, credentials, or proprietary business data is exposed
 - This repo is a signal of *engineering approach*, not a technical specification
+- **Privacy policy for public logs:**
+  - Never secrets, tokens, emails, or partial OAuth/client identifiers
+  - Environment variable **names** are OK; **values** are never written
+  - Colleagues may be named; their emails may not
+  - Mood and context notes are intentional — see [`.cursorrules`](./.cursorrules)
 
 ---
 
