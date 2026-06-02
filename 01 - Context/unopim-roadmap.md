@@ -3,7 +3,7 @@
 Document de référence pour l'intégration UnoPIM dans la plateforme Midbec.
 Source de vérité produit côté PIM, gérée par Patrick.
 
-**Dernière mise à jour :** 29 mai 2026
+**Dernière mise à jour :** 2 juin 2026
 
 ---
 
@@ -37,11 +37,11 @@ Next.js (front) → Go API (Chi) → UnoPIM REST API (OAuth2 Laravel Passport)
 | 2 — Listing produits par catégorie | Scope 12 | ✅ Done | 29 mai |
 | 2b — Navigation catalogue unifiée | Scope 12b | ✅ Done | 29 mai |
 | **2c — Panneau enfant style Amazon** | **Scope 12c** | **✅ Done** | **29 mai** |
-| 3 — Recherche UnoPIM (+ ERP optionnel plus tard) | — | ⏳ À faire | — |
+| **3 — Recherche header (ERP discovery + UnoPIM)** | **Scope 13** | **✅ Done (code)** — validation données en cours | **1–2 juin** |
 | 4 — Remplacement progressif fake data | — | ⏳ À faire | — |
 | Cleanup — suppression config statique | — | ⏳ À faire | — |
 
-**Daily logs associés :** [`2026-05-21`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-21.md) · [`2026-05-22`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-22.md) · [`2026-05-25`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-25.md) · [`2026-05-26`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-26.md) · [`2026-05-28`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-28.md)
+**Daily logs associés :** [`2026-05-21`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-21.md) · [`2026-05-22`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-22.md) · [`2026-05-25`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-25.md) · [`2026-05-26`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-26.md) · [`2026-05-28`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-28.md) · [`2026-05-29`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-29.md) · [`2026-06-01`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-01.md) · [`2026-06-02`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-02.md)
 
 ---
 
@@ -186,13 +186,16 @@ Filtre UnoPIM : `categories IN [code]` + `status = true`. Pas de cache. Defaults
 
 - Page `/produits/[slug]` : ✅ sous-catégories + grille produits + pagination
 - Route `/shop/[slug]` : ❌ toujours fake data (étape 4)
-- Prix ERP sur cartes produits : ❌ (étape 3)
+- Prix ERP sur cartes catalogue : ❌ (hors scope volontaire)
+- Recherche header mode pièce : ✅ (étape 3 — prix ERP dans suggestions)
 
 ### Validation
 
 ```bash
-curl "http://localhost:8080/pim/categories/refrigeration-commerciale/products?page=1&limit=24"
+curl "http://localhost:8080/pim/categories/refrigeration-commercial-1237/products?page=1&limit=24"
 ```
+
+> **Note slugs :** le code UnoPIM L1 « Réfrigération commercial » est `refrigeration-commercial-1237` (pas `refrigeration-commerciale`, qui était un ancien identifiant / nom de fichier PNG).
 
 ---
 
@@ -271,15 +274,74 @@ Chaque enfant direct = groupe (en-tête L2 + liens L3). Profondeur megamenu limi
 
 ---
 
-## Étape 3 — Recherche UnoPIM ⏳
+## Étape 3 — Recherche header ✅ (1–2 juin)
 
 ### Objectif
 
-Refactorer la recherche header (`src/hooks/useSearch.ts`) pour s'appuyer sur UnoPIM comme source catalogue.
+Brancher la recherche pièces du header sur UnoPIM comme source catalogue officielle, tout en conservant la discovery ERP et l'overlay prix.
 
-### Note ERP
+**Important :** UnoPIM REST ne filtre pas par nom — seulement SKU exact. L'autocomplete pièces passe donc par l'ERP pour trouver des candidats, puis UnoPIM pour valider et enrichir.
 
-L'overlay prix ERP sur les pages catégorie est **hors scope volontaire** pour garder la stack simple. La recherche pièces peut continuer à utiliser `/api/search` (ERP) en parallèle jusqu'à décision contraire.
+### Pipeline
+
+```
+Header (mode pièce) → GET /pim/search
+  → ExecuteSearch ERP (20 hits max)
+  → pour chaque hit : lookup UnoPIM par code ERP puis supplier_prodno
+  → exclusion si absent UnoPIM ou sans catégorie hors root
+  → suggestion : nom/image UnoPIM + prix/stock ERP
+```
+
+### Backend Go
+
+| Fichier | Changement |
+| --- | --- |
+| `internal/clients/unopim/client.go` | `GetProductBySKU` |
+| `internal/clients/unopim/product_values.go` | Helpers nom / image / catégorie primaire |
+| `internal/httpserver/handlers/pim.go` | `SearchPIMProducts`, types `PIMSearchSuggestion` |
+| `internal/httpserver/router.go` | Route `GET /pim/search?q=&limit=&locale=` |
+
+Params : `q` min 2 car., `limit` default 6 max 10, `locale` default `fr`.
+
+### Frontend
+
+| Fichier | Rôle |
+| --- | --- |
+| `src/hooks/useSearch.ts` | Mode pièce → `/pim/search` (remplace appel direct `/api/search`) |
+| `src/lib/api/pim.types.ts` | `PIMSearchSuggestion`, `PIMSearchResponse` |
+| `src/components/header/Search.tsx` | Nom UnoPIM + SKU, badge stock, prix ERP |
+| `src/components/mobile/MobileHeader.tsx` | Idem mobile |
+
+UX : clic suggestion → `/produits/{category_code}`. Submit Entrée → `/recherche?q=` (page inexistante — Scope 9).
+
+Mode modèle PartSmart : inchangé (`/partsmart/search/models`).
+
+### Validation (2 juin 2026)
+
+```bash
+# ERP trouve des candidats
+curl "http://localhost:8080/api/search?q=10h&page=1&limit=3"
+# → 68 hits — ex. FF110HBX, 679D410H01D
+
+# Pipeline PIM filtre (garde-fou actif)
+curl "http://localhost:8080/pim/search?q=10h&limit=6&locale=fr"
+# → results: [] tant que SKU ERP ∉ UnoPIM
+```
+
+**Statut données (2 juin) :** Patrick importe les produits UnoPIM — `GET /pim/categories/{code}/products` retourne `total: 0` sur toutes les catégories testées. L'autocomplete header restera vide jusqu'à alignement SKU + import catalogue.
+
+### Hors scope volontaire
+
+- Fallback ERP si SKU absent d'UnoPIM (masquerait le décalage données)
+- Overlay prix ERP sur cartes pages catégorie (étape 2)
+- Page résultats `/recherche` (Scope 9)
+
+### État actuel après étape 3
+
+- Recherche header mode pièce : ✅ codé et branché
+- Validation end-to-end avec SKU aligné : ⏳ en attente import Patrick
+- Autocomplete pièces en UI : vide (comportement attendu sans données PIM)
+- Submit Entrée mode pièce : ❌ `/recherche` (Scope 9)
 
 ---
 
@@ -302,7 +364,7 @@ Approche strangler fig : migrer domaine par domaine, pas de big bang.
 | Item | Fichier | Raison |
 | --- | --- | --- |
 | Config statique départements | `src/data/headerDepartments.ts` | Remplacé par arbre UnoPIM dynamique |
-| Mapping slugs UnoPIM ↔ ERP | — | Non existant — à définir avec l'équipe |
+| Mapping SKU UnoPIM ↔ ERP | — | Non existant — Patrick importe ; SKU UnoPIM doit matcher `code` ou `supplier_prodno` ERP |
 
 ---
 
@@ -311,6 +373,7 @@ Approche strangler fig : migrer domaine par domaine, pas de big bang.
 ### Routes Go actives (PIM)
 
 ```
+GET /pim/search                    → recherche pièces (ERP discovery + enrichissement UnoPIM)
 GET /pim/categories              → proxy brut UnoPIM (paginé)
 GET /pim/categories/root         → 19 catégories racines (cache 5 min)
 GET /pim/categories/tree         → arbre complet (cache 5 min)
@@ -362,10 +425,10 @@ flowchart LR
 
     Departments -->|"/pim/categories/tree"| PimHandlers
     CatPage -->|"/pim/categories/code"| PimHandlers
-    CatPage -.->|"étape 2: /products"| PimHandlers
-    Search -.->|"étape 3"| PimHandlers
-    Search -->|"/api/search"| SearchHandler
+    CatPage -->|"/pim/categories/code/products"| PimHandlers
+    Search -->|"/pim/search"| PimHandlers
     PimHandlers --> UnoClient --> UnoPIM
+    PimHandlers -->|"ExecuteSearch"| SearchHandler
     SearchHandler --> ERP
 ```
 
@@ -373,7 +436,9 @@ flowchart LR
 
 - Chaque développeur doit pointer sa config locale vers le bon environnement UnoPIM (accès réseau interne requis)
 - Redémarrer l'API Go après un changement backend (cache catégories actif 5 min)
-- Les codes UnoPIM (slugs) ne correspondent pas aux identifiants ERP
+- Les codes UnoPIM (slugs) ne correspondent pas aux identifiants ERP — ex. L1 réfrigération commerciale = `refrigeration-commercial-1237`
+- Autocomplete pièces vide tant que SKU ERP ≠ SKU UnoPIM ou catalogue produit non importé (Patrick)
+- Redémarrer `go run` après ajout de route — sinon 404 sur nouvelles routes PIM
 - Vérifier channel/locale UnoPIM Midbec (`fr_CA`) vs doc générique UnoPIM (`en_AU`)
 - Processus Go orphelin sous Windows peut bloquer le port — vérifier via outils système si l'API ne répond plus
 

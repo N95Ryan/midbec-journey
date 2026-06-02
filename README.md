@@ -78,9 +78,9 @@ midbec-journey/
 | 10 | UnoPIM — OAuth2 auth, category cache, Go proxy | ✅ Done |
 | 11 | UnoPIM — category tree, icons, dynamic catalogue menu | ✅ Done |
 | 12 | UnoPIM — product listing + unified navigation + drill-down panel | ✅ Done |
-| 13 | UnoPIM — header search | ⏳ Planned |
+| 13 | UnoPIM — header search (ERP discovery + enrichissement PIM) | ✅ Done (code — import produits Patrick en cours) |
 
-> Scopes 10–13 map to steps 0→4 in [`unopim-roadmap.md`](./01%20-%20Context/unopim-roadmap.md).
+> Scopes 10–13 map to steps 0→3 in [`unopim-roadmap.md`](./01%20-%20Context/unopim-roadmap.md). Scope 13 est livré côté code ; l'autocomplete pièces reste vide jusqu'à l'alignement SKU ERP ↔ UnoPIM.
 
 ---
 
