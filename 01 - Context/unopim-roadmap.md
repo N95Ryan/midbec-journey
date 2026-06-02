@@ -34,8 +34,10 @@ Next.js (front) → Go API (Chi) → UnoPIM REST API (OAuth2 Laravel Passport)
 | 0b — Cache catégories racines | Scope 10 | ✅ Done | 25 mai |
 | 0c — Catégories racines en UI | Scope 10 | ✅ Done | 26 mai |
 | **1 — Arbre catégories & megamenu** | **Scope 11** | **✅ Done** | **28 mai** |
-| 2 — Listing produits par catégorie | Scope 12 | 🔄 En cours | 29 mai → |
-| 3 — Recherche UnoPIM + overlay prix ERP | — | ⏳ À faire | — |
+| 2 — Listing produits par catégorie | Scope 12 | ✅ Done | 29 mai |
+| 2b — Navigation catalogue unifiée | Scope 12b | ✅ Done | 29 mai |
+| **2c — Panneau enfant style Amazon** | **Scope 12c** | **✅ Done** | **29 mai** |
+| 3 — Recherche UnoPIM (+ ERP optionnel plus tard) | — | ⏳ À faire | — |
 | 4 — Remplacement progressif fake data | — | ⏳ À faire | — |
 | Cleanup — suppression config statique | — | ⏳ À faire | — |
 
@@ -124,8 +126,9 @@ GET /pim/categories/{code}    → nœud + enfants
 | `src/lib/api/pim.queries.ts` | Hooks TanStack Query (`usePIMCategoryTree`) |
 | `src/lib/api/pim.server.ts` | Fetch server-side catégorie par code |
 | `src/lib/pim/categoryIcons.ts` | Mapping slug → icône PNG (19 slugs) |
-| `src/lib/pim/mapCategoryTreeToDepartments.ts` | Arbre UnoPIM → colonnes megamenu |
-| `src/components/header/Departments.tsx` | Megamenu au survol piloté par l'arbre UnoPIM |
+| `src/lib/pim/mapCategoryTreeToDepartments.ts` | Liens departments (`code`, `hasChildren`) + mobile |
+| `src/components/header/Departments.tsx` | Liste parente + panneau enfant drill-down |
+| `src/components/header/DepartmentsChildPanel.tsx` | Panneau enfant 360px (étape 2c) |
 | `src/app/[locale]/produits/[slug]/page.tsx` | Page catégorie : titre localisé + grille sous-catégories |
 
 **UI megamenu :**
@@ -145,59 +148,138 @@ GET /pim/categories/{code}    → nœud + enfants
 
 - Megamenu Catalogue : ✅ dynamique depuis UnoPIM
 - Page `/produits/[slug]` : ✅ titre + sous-catégories
-- Listing produits sur pages catégories : ❌ toujours fake data (`/shop/[slug]`)
+- Listing produits sur pages catégories : ❌ (corrigé à l'étape 2)
 
 ---
 
-## Étape 2 — Listing produits par catégorie 🔄 (en cours)
+## Étape 2 — Listing produits par catégorie ✅ (29 mai)
 
-### Objectif
+### Décision produit — Option A
 
-Afficher les produits UnoPIM sur `/produits/[slug]` — actuellement la page ne montre que les sous-catégories.
+Une page catégorie affiche **les deux blocs** quand ils existent :
 
-### API UnoPIM
+1. **Sous-catégories** — enfants directs du slug (existant)
+2. **Produits** — produits UnoPIM rattachés **à ce slug uniquement** (pas récursif dans les sous-catégories)
 
-Documentation : [Products API UnoPIM](https://devdocs.unopim.com/2.0/api/product.html)
+Réversible : si l'Option A ne convient pas métier, revenir à « produits seulement sur catégories feuilles ».
 
+### Backend Go
+
+| Fichier | Changement |
+| --- | --- |
+| `internal/clients/unopim/client.go` | Types `Product`, `ProductsPage` + `GetProductsByCategory` |
+| `internal/httpserver/handlers/pim.go` | Handler `GetPIMCategoryProducts` |
+| `internal/httpserver/router.go` | Route `GET /pim/categories/{code}/products` (avant `{code}`) |
+
+Filtre UnoPIM : `categories IN [code]` + `status = true`. Pas de cache. Defaults : `page=1`, `limit=24`, cap `limit=100`.
+
+### Frontend
+
+| Fichier | Rôle |
+| --- | --- |
+| `src/lib/api/pim.types.ts` | `PIMProduct`, `PIMProductsPage`, `getProductName`, `getProductImage` |
+| `src/lib/api/pim.server.ts` | `fetchPIMProductsByCategory` (revalidate 60s) |
+| `src/components/pim/PIMProductCard.tsx` | Carte légère (nom, SKU, image — sans prix ERP) |
+| `src/app/[locale]/produits/[slug]/page.tsx` | Option A + pagination `?page=` |
+
+### État actuel après étape 2
+
+- Page `/produits/[slug]` : ✅ sous-catégories + grille produits + pagination
+- Route `/shop/[slug]` : ❌ toujours fake data (étape 4)
+- Prix ERP sur cartes produits : ❌ (étape 3)
+
+### Validation
+
+```bash
+curl "http://localhost:8080/pim/categories/refrigeration-commerciale/products?page=1&limit=24"
 ```
-GET /api/v1/rest/products?limit=24&page=1&filters={"categories":[{"operator":"IN","value":["slug-categorie"]}],"status":[{"operator":"=","value":true}]}
-```
-
-Filtres disponibles : `sku`, `parent`, `status`, `categories`, `family`.
-
-### Backend Go (à faire)
-
-- Méthode `GetProductsByCategory(ctx, code, page, limit)` dans `client.go`
-- Handler `GetPIMCategoryProducts` dans `pim.go`
-- Route proposée : `GET /pim/categories/{code}/products?page=&limit=`
-- Pas de cache long (produits plus volatils que catégories)
-
-### Frontend (à faire)
-
-- Types `PIMProduct` + helpers locale (même pattern que `getCategoryName`)
-- Fetch server-side dans `produits/[slug]/page.tsx`
-- Grille produits (composant léger ou adaptation de `ProductCard`)
-- Pagination basique (page / total / last_page)
-
-### Hors scope étape 2
-
-- Overlay prix ERP → reporté à l'étape 3
-- Mapping SKU UnoPIM ↔ code ERP → pas encore de couche de mapping
 
 ---
 
-## Étape 3 — Recherche UnoPIM + overlay prix ERP ⏳
+## Étape 2b — Navigation catalogue unifiée ✅ (29 mai)
+
+**Principe :** une seule structure de sous-catégories partagée (megamenu, page, mobile). **UnoPIM seul — pas de toucher à l'ERP.**
+
+### Helper partagé
+
+| Fichier | Rôle |
+| --- | --- |
+| `src/lib/pim/buildCategorySubnav.ts` | `buildCategorySubnav()` + `getPIMCategoryPath()` |
+
+Chaque enfant direct = groupe (en-tête L2 + liens L3). Profondeur megamenu limitée à 2 niveaux.
+
+### Megamenu desktop
+
+| Fichier | Changement |
+| --- | --- |
+| `src/lib/pim/mapCategoryTreeToDepartments.ts` | 1 colonne = 1 groupe sémantique (plus de slice arithmétique) |
+| `src/components/header/MegamenuLinks.tsx` | Lien « Tout voir → » stylisé par groupe |
+
+### Page catégorie
+
+| Fichier | Changement |
+| --- | --- |
+| `src/components/pim/CategorySubnavList.tsx` | Sous-catégories en liste + icônes + « Tout voir » |
+| `src/app/[locale]/produits/[slug]/page.tsx` | Fil d'Ariane + compteur résultats |
+| `src/lib/api/pim.server.ts` | `fetchPIMCategoryTree()` |
+
+### Menu mobile
+
+| Fichier | Changement |
+| --- | --- |
+| `src/components/mobile/MobileMenu.tsx` | Drill-down Catalogue UnoPIM (remplace stub `/catalogue`) |
+| `mapPIMTreeToMobileMenuLinks()` | Arbre récursif + « Tout voir » par niveau |
+
+### Hors scope volontaire
+
+- Enrichissement ERP (prix, stock, panier) — reporté
+- Filtres sidebar, tri in-category
+
+### État actuel après étape 2b
+
+- Megamenu ↔ page catégorie : **même structure** de sous-catégories (liste une colonne depuis 2c)
+- Mobile : navigation catalogue UnoPIM
+- Cartes produits : UnoPIM seul (nom, SKU, image)
+
+---
+
+## Étape 2c — Panneau enfant style Amazon ✅ (29 mai)
+
+**Décision UX :** garder la liste parente à gauche (hover inchangé), remplacer le megamenu multi-colonnes (~1120px) par un **panneau enfant fixe 360px** avec drill-down interne (pattern conveyor mobile).
+
+### Frontend
+
+| Fichier | Rôle |
+| --- | --- |
+| `src/lib/pim/buildCategorySubnav.ts` | Export `findPIMCategoryNode()` |
+| `src/lib/pim/mapCategoryTreeToDepartments.ts` | Simplifié : `code` + `hasChildren` (plus de megamenu) |
+| `src/components/header/DepartmentsChildPanel.tsx` | Panneau 360px, une colonne, chevrons, « Tout voir → » |
+| `src/components/header/Departments.tsx` | Liste parente conservée ; panneau enfant au survol |
+| `src/components/pim/CategorySubnavList.tsx` | Liste une colonne sur page catégorie (cohérence visuelle) |
+| `src/types/departments-link.ts` | `code`, `hasChildren` à la place de `submenu` |
+
+### Hors scope (refusé)
+
+- Drawer plein écran au clic
+- Remplacement total du megamenu / liste parente
+
+### État actuel après étape 2c
+
+- Desktop : panneau enfant lisible (360px, drill-down)
+- Page catégorie : sous-nav en liste (plus de grille multi-colonnes)
+- Mobile : inchangé (drill-down déjà en place à l'étape 2b)
+
+---
+
+## Étape 3 — Recherche UnoPIM ⏳
 
 ### Objectif
 
-Refactorer la recherche header (`src/hooks/useSearch.ts`) pour combiner :
+Refactorer la recherche header (`src/hooks/useSearch.ts`) pour s'appuyer sur UnoPIM comme source catalogue.
 
-- Données catalogue UnoPIM (nom, SKU, catégories)
-- Prix inventaire ERP via `GET /api/search` (`midbec-go-api/internal/httpserver/handlers/search.go`)
+### Note ERP
 
-### Contexte actuel
-
-La recherche pièces utilise déjà l'ERP (`/api/search?q=...`). L'étape 3 unifie la source produit sur UnoPIM tout en conservant l'overlay prix ERP pour les clients connectés.
+L'overlay prix ERP sur les pages catégorie est **hors scope volontaire** pour garder la stack simple. La recherche pièces peut continuer à utiliser `/api/search` (ERP) en parallèle jusqu'à décision contraire.
 
 ---
 
@@ -233,7 +315,7 @@ GET /pim/categories              → proxy brut UnoPIM (paginé)
 GET /pim/categories/root         → 19 catégories racines (cache 5 min)
 GET /pim/categories/tree         → arbre complet (cache 5 min)
 GET /pim/categories/{code}       → nœud + enfants
-GET /pim/categories/{code}/products  → (étape 2, à implémenter)
+GET /pim/categories/{code}/products  → produits par catégorie (paginé, sans cache)
 ```
 
 ### Variables d'environnement
@@ -262,7 +344,7 @@ Pattern établi dans `pim.types.ts` → `getCategoryName()`.
 ```mermaid
 flowchart LR
     subgraph frontend [Next.js]
-        Departments[Departments megamenu]
+        Departments[Departments drill-down]
         CatPage["/produits/slug"]
         Search[Header search]
     end
