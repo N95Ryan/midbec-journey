@@ -74,7 +74,7 @@ midbec-journey/
 | 6 | i18n routing — bilingual URLs (FR/EN) with next-intl | ✅ Done |
 | 7 | Garage/Vehicle feature removal — full cleanup | ✅ Done |
 | 8 | PartSmart integration — model search, IPL exploded view, cart | ✅ Done |
-| 9 | Unified header search — model + part autocomplete, Google-style | 🔄 In progress |
+| 9 | Unified header search — autocomplete + page `/recherche` (mode pièce) | ✅ Done (code — résultats catalogue vides jusqu'à import Patrick) |
 | 10 | UnoPIM — OAuth2 auth, category cache, Go proxy | ✅ Done |
 | 11 | UnoPIM — category tree, icons, dynamic catalogue menu | ✅ Done |
 | 12 | UnoPIM — product listing + unified navigation + drill-down panel | ✅ Done |

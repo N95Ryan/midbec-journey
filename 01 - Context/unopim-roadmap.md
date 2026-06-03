@@ -3,7 +3,7 @@
 Document de référence pour l'intégration UnoPIM dans la plateforme Midbec.
 Source de vérité produit côté PIM, gérée par Patrick.
 
-**Dernière mise à jour :** 2 juin 2026
+**Dernière mise à jour :** 3 juin 2026
 
 ---
 
@@ -312,7 +312,7 @@ Params : `q` min 2 car., `limit` default 6 max 10, `locale` default `fr`.
 | `src/components/header/Search.tsx` | Nom UnoPIM + SKU, badge stock, prix ERP |
 | `src/components/mobile/MobileHeader.tsx` | Idem mobile |
 
-UX : clic suggestion → `/produits/{category_code}`. Submit Entrée → `/recherche?q=` (page inexistante — Scope 9).
+UX : clic suggestion → `/produits/{category_code}`. Submit Entrée → `/recherche?q=` (Scope 9 — page résultats).
 
 Mode modèle PartSmart : inchangé (`/partsmart/search/models`).
 
@@ -334,14 +334,20 @@ curl "http://localhost:8080/pim/search?q=10h&limit=6&locale=fr"
 
 - Fallback ERP si SKU absent d'UnoPIM (masquerait le décalage données)
 - Overlay prix ERP sur cartes pages catégorie (étape 2)
-- Page résultats `/recherche` (Scope 9)
 
-### État actuel après étape 3
+### Scope 9 — Page résultats `/recherche` (3 juin 2026) ✅
+
+- `GET /pim/search` : pagination (`page`, `limit` max 50) ; mode autocomplete (`limit` ≤ 10) inchangé pour le header
+- Réponse : `page`, `limit`, `total_results`, `total_pages`, `results`
+- Front : `src/app/[locale]/recherche/page.tsx`, `fetchPIMSearch`, `PIMSearchResultCard`, `url.partSearch`
+- Clic carte → `/produits/{category_code}` (pas de PDP SKU)
+
+### État actuel après étape 3 + Scope 9
 
 - Recherche header mode pièce : ✅ codé et branché
+- Page résultats `/recherche` (submit Entrée) : ✅ codé
 - Validation end-to-end avec SKU aligné : ⏳ en attente import Patrick
 - Autocomplete pièces en UI : vide (comportement attendu sans données PIM)
-- Submit Entrée mode pièce : ❌ `/recherche` (Scope 9)
 
 ---
 
