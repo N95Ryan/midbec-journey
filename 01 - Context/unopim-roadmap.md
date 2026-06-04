@@ -363,13 +363,25 @@ Remplacer progressivement le fake-server shop :
 
 Approche strangler fig : migrer domaine par domaine, pas de big bang.
 
+### Slice A — Redirects legacy (4 juin 2026) ✅
+
+| Route legacy | Cible |
+| --- | --- |
+| `/shop` | `/catalogue` (`permanentRedirect`) |
+| `/shop/[slug]` | `/produits/[slug]` |
+| `/produit/[slug]` | `/recherche?q=[slug]` |
+
+- Fichiers redirect : `shop/page.tsx`, `shop/[slug]/page.tsx`, `produit/[slug]/page.tsx` — plus de rendu fake shop sur ces URLs
+- Homepage hero : CTAs → `url.pageCatalogue()` (plus de liens `/shop` hardcodés)
+- **Conservé pour panier** : composants shop fake, `shopApi`, Redux `shop`, fake-server orders — hors scope slice A
+
 ---
 
 ## Cleanup ⏳
 
 | Item | Fichier | Raison |
 | --- | --- | --- |
-| Config statique départements | `src/data/headerDepartments.ts` | Remplacé par arbre UnoPIM dynamique |
+| Config statique départements | ~~`src/data/headerDepartments.ts`~~ | Supprimé 4 juin 2026 — menu = arbre UnoPIM dynamique |
 | Mapping SKU UnoPIM ↔ ERP | — | Non existant — Patrick importe ; SKU UnoPIM doit matcher `code` ou `supplier_prodno` ERP |
 
 ---
