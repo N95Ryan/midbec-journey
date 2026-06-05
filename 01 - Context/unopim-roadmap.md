@@ -3,7 +3,7 @@
 Document de référence pour l'intégration UnoPIM dans la plateforme Midbec.
 Source de vérité produit côté PIM, gérée par Patrick.
 
-**Dernière mise à jour :** 3 juin 2026
+**Dernière mise à jour :** 5 juin 2026
 
 ---
 
@@ -38,10 +38,11 @@ Next.js (front) → Go API (Chi) → UnoPIM REST API (OAuth2 Laravel Passport)
 | 2b — Navigation catalogue unifiée | Scope 12b | ✅ Done | 29 mai |
 | **2c — Panneau enfant style Amazon** | **Scope 12c** | **✅ Done** | **29 mai** |
 | **3 — Recherche header (ERP discovery + UnoPIM)** | **Scope 13** | **✅ Done (code)** — validation données en cours | **1–2 juin** |
-| 4 — Remplacement progressif fake data | — | ⏳ À faire | — |
-| Cleanup — suppression config statique | — | ⏳ À faire | — |
+| **4 — Remplacement progressif fake data** | **Slice A** | **✅ Done** — slice B reporté (import Patrick) | **4 juin** |
+| Cleanup — suppression config statique | — | **✅ Done** | **4 juin** |
+| **PartSmart — proxy Go recherche modèle/pièce** | Scope 8 | **✅ Done (code + e2e)** — auth Postman + Go validés 5 juin | **5 juin** |
 
-**Daily logs associés :** [`2026-05-21`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-21.md) · [`2026-05-22`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-22.md) · [`2026-05-25`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-25.md) · [`2026-05-26`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-26.md) · [`2026-05-28`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-28.md) · [`2026-05-29`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-29.md) · [`2026-06-01`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-01.md) · [`2026-06-02`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-02.md)
+**Daily logs associés :** [`2026-05-21`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-21.md) · [`2026-05-22`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-22.md) · [`2026-05-25`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-25.md) · [`2026-05-26`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-26.md) · [`2026-05-28`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-28.md) · [`2026-05-29`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-29.md) · [`2026-06-01`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-01.md) · [`2026-06-02`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-02.md) · [`2026.06-05`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026.06-05.md)
 
 ---
 
@@ -375,9 +376,37 @@ Approche strangler fig : migrer domaine par domaine, pas de big bang.
 - Homepage hero : CTAs → `url.pageCatalogue()` (plus de liens `/shop` hardcodés)
 - **Conservé pour panier** : composants shop fake, `shopApi`, Redux `shop`, fake-server orders — hors scope slice A
 
+### Slice B — Carrousels homepage → PIM ⏳ **Reporté**
+
+Dépend de l'import produits Patrick. Ne pas toucher tant que `GET /pim/categories/{code}/products` retourne `total: 0`.
+
 ---
 
-## Cleanup ⏳
+## PartSmart — Proxy Go (5 juin 2026) ✅
+
+Intégration via API Go uniquement — **embed `stream.js` hors périmètre** (validé en Postman, non utilisé par Midbec).
+
+### Réalisé
+
+- Auth two-step validée : Postman (5 juin) puis proxy Go e2e (5 juin)
+- `GET /partsmart/token` → admin + portal user token (`expires_in` 10800s)
+- `GET /partsmart/search/models?query=` → résultats modèles (ex. `WFW5620`)
+- `GET /partsmart/search/parts?query=` → résultats pièces (ex. `80040`)
+- Front : header mode Modèle + page `/recherche-par-modele` (+ deep-link `?q=`)
+
+### Découverte
+
+Le `refresh_token` portal est **partagé et lié au compte admin** — à prendre en compte pour le TTL cache Go.
+
+### Vigilance
+
+- `groupCode` : Go utilise `"DEFAULT"` — confirmer avec LeadVenture si besoin
+- Recherche modèles par **marque** (`whirlpool`) peut retourner `[]` — utiliser numéro de modèle ou référence pièce
+- Import catalogue UnoPIM (Patrick) reste le bloquant pour la recherche **pièces** catalogue
+
+---
+
+## Cleanup ✅
 
 | Item | Fichier | Raison |
 | --- | --- | --- |
@@ -397,6 +426,16 @@ GET /pim/categories/root         → 19 catégories racines (cache 5 min)
 GET /pim/categories/tree         → arbre complet (cache 5 min)
 GET /pim/categories/{code}       → nœud + enfants
 GET /pim/categories/{code}/products  → produits par catégorie (paginé, sans cache)
+```
+
+### Routes Go actives (PartSmart)
+
+```
+GET /partsmart/token                        → portal user token (two-step auth)
+GET /partsmart/search/models?query=         → recherche modèles
+GET /partsmart/search/parts?query=&exact=   → recherche pièces
+GET /partsmart/model/{catalogId}/{modelGuid}
+GET /partsmart/ipl/{catalogId}/{iplGuid}?modelId=
 ```
 
 ### Variables d'environnement
