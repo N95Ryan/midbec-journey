@@ -3,7 +3,7 @@
 Document de référence pour l'intégration UnoPIM dans la plateforme Midbec.
 Source de vérité produit côté PIM, gérée par Patrick.
 
-**Dernière mise à jour :** 5 juin 2026
+**Dernière mise à jour :** 10 juin 2026
 
 ---
 
@@ -37,12 +37,13 @@ Next.js (front) → Go API (Chi) → UnoPIM REST API (OAuth2 Laravel Passport)
 | 2 — Listing produits par catégorie | Scope 12 | ✅ Done | 29 mai |
 | 2b — Navigation catalogue unifiée | Scope 12b | ✅ Done | 29 mai |
 | **2c — Panneau enfant style Amazon** | **Scope 12c** | **✅ Done** | **29 mai** |
+| **2d — Overlay prix ERP cartes catégorie + cohérence B2B** | **Scope 12d** | **✅ Done (code)** — validation données en cours | **9–10 juin** |
 | **3 — Recherche header (ERP discovery + UnoPIM)** | **Scope 13** | **✅ Done (code)** — validation données en cours | **1–2 juin** |
 | **4 — Remplacement progressif fake data** | **Slice A** | **✅ Done** — slice B reporté (import Patrick) | **4 juin** |
 | Cleanup — suppression config statique | — | **✅ Done** | **4 juin** |
 | **PartSmart — proxy Go recherche modèle/pièce** | Scope 8 | **✅ Done (code + e2e)** — auth Postman + Go validés 5 juin | **5 juin** |
 
-**Daily logs associés :** [`2026-05-21`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-21.md) · [`2026-05-22`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-22.md) · [`2026-05-25`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-25.md) · [`2026-05-26`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-26.md) · [`2026-05-28`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-28.md) · [`2026-05-29`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-29.md) · [`2026-06-01`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-01.md) · [`2026-06-02`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-02.md) · [`2026.06-05`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026.06-05.md)
+**Daily logs associés :** [`2026-05-21`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-21.md) · [`2026-05-22`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-22.md) · [`2026-05-25`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-25.md) · [`2026-05-26`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-26.md) · [`2026-05-28`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-28.md) · [`2026-05-29`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-29.md) · [`2026-06-01`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-01.md) · [`2026-06-02`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-02.md) · [`2026.06-05`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026.06-05.md) · [`2026-06-09`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-09.md) · [`2026-06-10`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-10.md)
 
 ---
 
@@ -180,14 +181,14 @@ Filtre UnoPIM : `categories IN [code]` + `status = true`. Pas de cache. Defaults
 | --- | --- |
 | `src/lib/api/pim.types.ts` | `PIMProduct`, `PIMProductsPage`, `getProductName`, `getProductImage` |
 | `src/lib/api/pim.server.ts` | `fetchPIMProductsByCategory` (revalidate 60s) |
-| `src/components/pim/PIMProductCard.tsx` | Carte légère (nom, SKU, image — sans prix ERP) |
+| `src/components/pim/PIMProductCard.tsx` | Carte légère (nom, SKU, image, prix ERP B2B) |
 | `src/app/[locale]/produits/[slug]/page.tsx` | Option A + pagination `?page=` |
 
 ### État actuel après étape 2
 
 - Page `/produits/[slug]` : ✅ sous-catégories + grille produits + pagination
 - Route `/shop/[slug]` : ❌ toujours fake data (étape 4)
-- Prix ERP sur cartes catalogue : ❌ (hors scope volontaire)
+- Prix ERP sur cartes catalogue : ✅ ([`2026-06-09.md`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-09.md)) — validation données en attente Patrick
 - Recherche header mode pièce : ✅ (étape 3 — prix ERP dans suggestions)
 
 ### Validation
@@ -197,6 +198,33 @@ curl "http://localhost:8080/pim/categories/refrigeration-commercial-1237/product
 ```
 
 > **Note slugs :** le code UnoPIM L1 « Réfrigération commercial » est `refrigeration-commercial-1237` (pas `refrigeration-commerciale`, qui était un ancien identifiant / nom de fichier PNG).
+
+---
+
+## Étape 2d — Overlay prix ERP + cohérence B2B ✅ (9–10 juin)
+
+### Backend Go
+
+| Fichier | Changement |
+| --- | --- |
+| `internal/httpserver/handlers/pim.go` | `GetPIMCategoryProducts` enrichi : `retail_price`, `cust_price`, `is_catalog_part`, `in_stock` |
+| `internal/httpserver/handlers/search.go` | Helper `lookupERPBySKU` (inventory puis catalogue ERP, B2B via session) |
+
+### Frontend
+
+| Fichier | Changement |
+| --- | --- |
+| `src/lib/api/pim.types.ts` | `PIMProductWithPrice`, `getDisplayPrice()` |
+| `src/components/pim/PIMProductCard.tsx` | Prix + badge stock/catalogue |
+| `src/components/pim/PIMSearchResultCard.tsx` | `getDisplayPrice` (page `/recherche`) |
+| `src/components/header/Search.tsx` + `MobileHeader.tsx` | `getDisplayPrice` (autocomplete mode pièce) |
+| `src/hooks/useSearch.ts` | `credentials: 'include'` sur `/pim/search` |
+
+### État actuel après étape 2d
+
+- Grilles catégorie : ✅ prix ERP par SKU (PIM → ERP)
+- Header + `/recherche` : ✅ même règle B2B (`cust_price` si session et différent du retail)
+- Validation end-to-end B2B : ⏳ en attente import Patrick + session test
 
 ---
 
@@ -334,7 +362,6 @@ curl "http://localhost:8080/pim/search?q=10h&limit=6&locale=fr"
 ### Hors scope volontaire
 
 - Fallback ERP si SKU absent d'UnoPIM (masquerait le décalage données)
-- Overlay prix ERP sur cartes pages catégorie (étape 2)
 
 ### Scope 9 — Page résultats `/recherche` (3 juin 2026) ✅
 
