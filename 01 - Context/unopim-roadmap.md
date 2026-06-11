@@ -3,7 +3,13 @@
 Document de référence pour l'intégration UnoPIM dans la plateforme Midbec.
 Source de vérité produit côté PIM, gérée par Patrick.
 
-**Dernière mise à jour :** 10 juin 2026
+**Dernière mise à jour :** 11 juin 2026
+
+**Documentation catalogue (repo back) :** [`midbec-go-api/docs/unopim-catalogue.md`](../../midbec-go-api/docs/unopim-catalogue.md) — structure attributs, familles, catégories, règles SKU, ordre d'import, routes API Go.
+
+**Smoke jour J (repo back) :** [`midbec-go-api/scripts/pim-smoke.sh`](../../midbec-go-api/scripts/pim-smoke.sh) — gate OAuth + checklist curl en ~1 min (`./scripts/pim-smoke.sh` avec API Go démarrée).
+
+**Statut infra (11 juin) :** OAuth UnoPIM toujours bloqué (FatalError Passport, confirmé 10 juin) — **Branche B** ; validation données catalogue en pause jusqu'à fix Patrick.
 
 ---
 
@@ -43,7 +49,7 @@ Next.js (front) → Go API (Chi) → UnoPIM REST API (OAuth2 Laravel Passport)
 | Cleanup — suppression config statique | — | **✅ Done** | **4 juin** |
 | **PartSmart — proxy Go recherche modèle/pièce** | Scope 8 | **✅ Done (code + e2e)** — auth Postman + Go validés 5 juin | **5 juin** |
 
-**Daily logs associés :** [`2026-05-21`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-21.md) · [`2026-05-22`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-22.md) · [`2026-05-25`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-25.md) · [`2026-05-26`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-26.md) · [`2026-05-28`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-28.md) · [`2026-05-29`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-29.md) · [`2026-06-01`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-01.md) · [`2026-06-02`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-02.md) · [`2026.06-05`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026.06-05.md) · [`2026-06-09`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-09.md) · [`2026-06-10`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-10.md)
+**Daily logs associés :** [`2026-05-21`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-21.md) · [`2026-05-22`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-22.md) · [`2026-05-25`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-25.md) · [`2026-05-26`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-26.md) · [`2026-05-28`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-28.md) · [`2026-05-29`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-29.md) · [`2026-06-01`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-01.md) · [`2026-06-02`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-02.md) · [`2026.06-05`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026.06-05.md) · [`2026-06-09`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-09.md) · [`2026-06-10`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-10.md) · [`2026-06-11`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-11.md)
 
 ---
 
@@ -224,6 +230,7 @@ curl "http://localhost:8080/pim/categories/refrigeration-commercial-1237/product
 
 - Grilles catégorie : ✅ prix ERP par SKU (PIM → ERP)
 - Header + `/recherche` : ✅ même règle B2B (`cust_price` si session et différent du retail)
+- SSR `/recherche` + grilles `/produits/[slug]` : ✅ forward cookie `mb_session` vers Go (11 juin — scope B3d)
 - Validation end-to-end B2B : ⏳ en attente import Patrick + session test
 
 ---

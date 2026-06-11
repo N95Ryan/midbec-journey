@@ -77,22 +77,35 @@ Pas de note chiffrée (pas de X/10).]
 - Ne jamais inventer de contenu technique absent des informations fournies.
 - Toujours restructurer, jamais réécrire le contenu existant.
 
+---
+
 ## Données interdites dans les logs publics
 
 ❌ **Jamais écrire :**
 - Secrets, tokens, mots de passe, ou fragments d'identifiants OAuth
 - Emails (collègues, clients, comptes de test)
 - Valeurs de variables d'environnement (`.env`, `.env.local`)
+- Chemins de fichiers internes au projet (`src/`, `internal/`, `scripts/`, etc.)
+- Noms de repos Git (`midbec-front`, `midbec-go-api`, `midbec-journey`)
+- Noms de branches Git (`feat/UnoPIM-api`, `chore/remove-legacy-blog`, etc.)
+- Ports locaux (`localhost:8080`, `:3000`, etc.)
+- Noms de fichiers internes (`pim.server.ts`, `pim-smoke.sh`, `headerDepartments.ts`, etc.)
+- Noms de collègues, sauf **Patrick** (seul nom autorisé explicitement)
 
 ✅ **Autorisé :**
-- Noms des collègues et partenaires (sans leurs emails)
-- Noms de variables d'environnement (`PIM_CLIENT_ID`, etc.)
-- `localhost` et endpoints locaux en contexte dev
+- Le prénom **Patrick** uniquement parmi les collègues
+- Noms de variables d'environnement (`PIM_CLIENT_ID`, `PIM_BASE_URL`, etc.)
+- Endpoints génériques en contexte dev (`[PIM_BASE_URL]/pim/search`, `[API]/categories/tree`)
+- Commandes `curl` et `bash` avec valeurs remplacées par des placeholders lisibles
 - Notes d'humeur et contexte quotidien (voir section Humeur)
+- Noms de technologies publiques (UnoPIM, Go, Next.js, PartSmart, etc.)
 
-**Règle de remplacement :** privilégier le contexte et le learning plutôt que
-le détail sensible (ex. « email placé par erreur dans client_id » plutôt que
-l'adresse réelle).
+**Règle de remplacement :** substituer tout élément interdit par un
+placeholder descriptif entre crochets (`[PIM_BASE_URL]`, `[script smoke]`,
+`[helper SSR]`, `[doc catalogue]`) ou reformuler en termes génériques
+(`"le helper de fetch serveur"` plutôt que `"pim.server.ts"`).
+
+---
 
 ## Format de commit pour les notes Obsidian
 
@@ -101,7 +114,4 @@ git commit -m "Ajout de la note du JOUR MOIS ANNÉE"
 
 Exemples :
 git add .
-git commit -m "Ajout de la note du 7 avril 2026"
-
-git add .
-git commit -m "Ajout de la note du 8 avril 2026"
+git commit -m "Ajout de la note du 5 Mai 2026"
