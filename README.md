@@ -79,8 +79,10 @@ midbec-journey/
 | 11 | UnoPIM — category tree, icons, dynamic catalogue menu | ✅ Done |
 | 12 | UnoPIM — product listing + unified navigation + drill-down panel | ✅ Done |
 | 13 | UnoPIM — header search (ERP discovery + enrichissement PIM) | ✅ Done (code — import produits Patrick en cours) |
+| 14 | Catalogue ERP interim + fiche produit E2E + cleanup shop Phase 1 | ✅ Done |
+| 15 | Polish UX catalogue ERP (title-case, megamenu feuilles) + CI/CD minimal | ✅ Done (19 juin) |
 
-> Scopes 10–13 map to steps 0→3 in [`unopim-roadmap.md`](./01%20-%20Context/unopim-roadmap.md). Scope 13 est livré côté code ; l'autocomplete pièces reste vide jusqu'à l'alignement SKU ERP ↔ UnoPIM.
+> Scopes 10–13 map to steps 0→3 in [`unopim-roadmap.md`](./01%20-%20Context/unopim-roadmap.md). Scope 13 est livré côté code ; l'autocomplete pièces reste vide jusqu'à l'alignement SKU ERP ↔ UnoPIM. **Catalogue actif : ERP interim** (`NEXT_PUBLIC_CATALOG_SOURCE` absent) en attendant le déblocage UnoPIM.
 
 ---
 

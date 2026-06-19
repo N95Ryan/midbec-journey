@@ -3,13 +3,15 @@
 Document de référence pour l'intégration UnoPIM dans la plateforme Midbec.
 Source de vérité produit côté PIM, gérée par Patrick.
 
-**Dernière mise à jour :** 11 juin 2026
+**Dernière mise à jour :** 19 juin 2026
 
 **Documentation catalogue (repo back) :** [`midbec-go-api/docs/unopim-catalogue.md`](../../midbec-go-api/docs/unopim-catalogue.md) — structure attributs, familles, catégories, règles SKU, ordre d'import, routes API Go.
 
 **Smoke jour J (repo back) :** [`midbec-go-api/scripts/pim-smoke.sh`](../../midbec-go-api/scripts/pim-smoke.sh) — gate OAuth + checklist curl en ~1 min (`./scripts/pim-smoke.sh` avec API Go démarrée).
 
-**Statut infra (11 juin) :** OAuth UnoPIM toujours bloqué (FatalError Passport, confirmé 10 juin) — **Branche B** ; validation données catalogue en pause jusqu'à fix Patrick.
+**Smoke catalogue ERP interim :** [`midbec-go-api/scripts/erp-catalog-smoke.sh`](../../midbec-go-api/scripts/erp-catalog-smoke.sh) — arbre, catégorie, produits, recherche, fiche SKU.
+
+**Statut infra (19 juin) :** OAuth UnoPIM toujours bloqué (FatalError Passport) — **Branche B** ; catalogue ERP interim actif côté front (`NEXT_PUBLIC_CATALOG_SOURCE` absent → ERP).
 
 ---
 
@@ -48,8 +50,13 @@ Next.js (front) → Go API (Chi) → UnoPIM REST API (OAuth2 Laravel Passport)
 | **4 — Remplacement progressif fake data** | **Slice A** | **✅ Done** — slice B reporté (import Patrick) | **4 juin** |
 | Cleanup — suppression config statique | — | **✅ Done** | **4 juin** |
 | **PartSmart — proxy Go recherche modèle/pièce** | Scope 8 | **✅ Done (code + e2e)** — auth Postman + Go validés 5 juin | **5 juin** |
+| **Catalogue ERP interim** | Scope 14a | **✅ Done** — arbre, catégories, produits, recherche | **16 juin** |
+| **Fiche produit catalogue E2E** | Scope 14b | **✅ Done** — ERP + PIM endpoints, front SSR, panier | **16–18 juin** |
+| **Cleanup legacy shop (Phase 1)** | — | **✅ Done** — Redux shop, pages listing supprimés | **18 juin** |
+| **Polish UX catalogue ERP** | Scope 15 | **✅ Done** — title-case, megamenu feuilles | **19 juin** |
+| **CI/CD minimal GitLab** | — | **✅ Done** — build front + vet/build back sur MR | **19 juin** |
 
-**Daily logs associés :** [`2026-05-21`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-21.md) · [`2026-05-22`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-22.md) · [`2026-05-25`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-25.md) · [`2026-05-26`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-26.md) · [`2026-05-28`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-28.md) · [`2026-05-29`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-29.md) · [`2026-06-01`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-01.md) · [`2026-06-02`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-02.md) · [`2026.06-05`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026.06-05.md) · [`2026-06-09`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-09.md) · [`2026-06-10`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-10.md) · [`2026-06-11`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-11.md)
+**Daily logs associés :** [`2026-05-21`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-21.md) · [`2026-05-22`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-22.md) · [`2026-05-25`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-25.md) · [`2026-05-26`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-26.md) · [`2026-05-28`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-28.md) · [`2026-05-29`](../03%20-%20Daily%20Logs/05%20-%20Mai%202026/2026-05-29.md) · [`2026-06-01`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-01.md) · [`2026-06-02`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-02.md) · [`2026.06-05`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026.06-05.md) · [`2026-06-09`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-09.md) · [`2026-06-10`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-10.md) · [`2026-06-11`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-11.md) · [`2026-06-16`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-16.md) · [`2026-06-18`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-18.md) · [`2026-06-19`](../03%20-%20Daily%20Logs/06%20-%20Juin%202026/2026-06-19.md)
 
 ---
 
