@@ -74,15 +74,15 @@ midbec-journey/
 | 6 | i18n routing — bilingual URLs (FR/EN) with next-intl | ✅ Done |
 | 7 | Garage/Vehicle feature removal — full cleanup | ✅ Done |
 | 8 | PartSmart integration — model search, IPL exploded view, cart | ✅ Done |
-| 9 | Unified header search — autocomplete + page `/recherche` (mode pièce) | ✅ Done (code — résultats catalogue vides jusqu'à import Patrick) |
+| 9 | Unified header search — autocomplete + `/recherche` page (part mode) | ✅ Done (code — catalog results empty until Patrick's import) |
 | 10 | UnoPIM — OAuth2 auth, category cache, Go proxy | ✅ Done |
 | 11 | UnoPIM — category tree, icons, dynamic catalogue menu | ✅ Done |
 | 12 | UnoPIM — product listing + unified navigation + drill-down panel | ✅ Done |
-| 13 | UnoPIM — header search (ERP discovery + enrichissement PIM) | ✅ Done (code — import produits Patrick en cours) |
-| 14 | Catalogue ERP interim + fiche produit E2E + cleanup shop Phase 1 | ✅ Done |
-| 15 | Polish UX catalogue ERP (title-case, megamenu feuilles) + CI/CD minimal | ✅ Done (19 juin) |
+| 13 | UnoPIM — header search (ERP discovery + PIM enrichment) | ✅ Done (code — Patrick's product import in progress) |
+| 14 | Interim ERP catalog + product detail page E2E + shop cleanup Phase 1 | ✅ Done |
+| 15 | ERP catalog UX polish (title-case, leaf megamenu) + minimal CI/CD | ✅ Done (Jun 19) |
 
-> Scopes 10–13 map to steps 0→3 in [`unopim-roadmap.md`](./01%20-%20Context/unopim-roadmap.md). Scope 13 est livré côté code ; l'autocomplete pièces reste vide jusqu'à l'alignement SKU ERP ↔ UnoPIM. **Catalogue actif : ERP interim** (`NEXT_PUBLIC_CATALOG_SOURCE` absent) en attendant le déblocage UnoPIM.
+> Scopes 10–13 map to steps 0→3 in [`unopim-roadmap.md`](./01%20-%20Context/unopim-roadmap.md). Scope 13 is delivered on the code side; part autocomplete remains empty until ERP SKU ↔ UnoPIM alignment. **Active catalog: interim ERP** (`NEXT_PUBLIC_CATALOG_SOURCE` unset) pending UnoPIM unblock.
 
 ---
 
