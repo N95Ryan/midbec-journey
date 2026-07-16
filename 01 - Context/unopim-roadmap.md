@@ -3,7 +3,7 @@
 Document de référence pour l'intégration UnoPIM dans la plateforme Midbec.
 Source de vérité produit côté PIM, gérée par Patrick.
 
-**Dernière mise à jour :** 19 juin 2026
+**Dernière mise à jour :** 16 juillet 2026
 
 **Documentation catalogue (repo back) :** [`midbec-go-api/docs/unopim-catalogue.md`](../../midbec-go-api/docs/unopim-catalogue.md) — structure attributs, familles, catégories, règles SKU, ordre d'import, routes API Go.
 
@@ -11,7 +11,11 @@ Source de vérité produit côté PIM, gérée par Patrick.
 
 **Smoke catalogue ERP interim :** [`midbec-go-api/scripts/erp-catalog-smoke.sh`](../../midbec-go-api/scripts/erp-catalog-smoke.sh) — arbre, catégorie, produits, recherche, fiche SKU.
 
-**Statut infra (19 juin) :** OAuth UnoPIM toujours bloqué (FatalError Passport) — **Branche B** ; catalogue ERP interim actif côté front (`NEXT_PUBLIC_CATALOG_SOURCE` absent → ERP).
+**Statut infra (16 juillet, PM) :** OAuth UnoPIM bloqué — **cause racine identifiée** via `scripts/pim-oauth-probe.go` : permissions incorrectes sur `oauth-private.key` (`664` au lieu de `600`). Fix serveur : `chmod 600` sur les clés dans `packages/Webkul/AdminApi/src/Secrets/Oauth/` — **action Patrick (SSH `10.10.10.6`)**. Catalogue ERP interim actif (`NEXT_PUBLIC_CATALOG_SOURCE=erp`).
+
+**Décision architecture (16 juillet, Patrick) :** UnoPIM = source de vérité **produits uniquement** ; Ogasys/ERP = prix, stock, comptes, commandes, factures. Aligné avec le modèle dual-source documenté dans `erp-map.md` et `unopim-catalogue.md`.
+
+**Daily log Phase 1 :** [`2026-07-16`](../03%20-%20Daily%20Logs/07%20-%20Juillet%202026/2026-07-16.md)
 
 ---
 
