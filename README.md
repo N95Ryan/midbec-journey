@@ -102,9 +102,9 @@ UnoPIM integration details: [`midbec-go-api/docs/unopim-catalogue.md`](../midbec
 | 17 | Checkout guest guardrails — no phantom anonymous order path | ✅ Done (Aug 5) |
 | 18 | Order confirmation — server-backed `GET /api/orders/{orderNo}` | ✅ Done (Aug 11) |
 | 19 | Pre-submit calculate parity — displayed total matches ERP create | ✅ Done (Aug 11) |
-| 20 | Invoices pipeline — list + download API | 🟡 API done — blocked by ERP test data |
+| 20 | Invoices pipeline — list + download API | 🟡 Shipped Jul (UI + API) — `/test` E2E probe blocked |
 | 21 | Front hygiene — quickview removal, megamenu i18n, audit triage | ✅ Done (Aug 12–13) |
-| 22 | Homepage → ERP carousels + static checkout countries | 🟡 Done (Aug 13) — legacy homepage audit pending |
+| 22 | Homepage → ERP carousels + static checkout countries | ✅ Done (Aug 13) — legacy homepage audit pending |
 
 > **Active catalog:** ERP (`NEXT_PUBLIC_CATALOG_SOURCE=erp`). UnoPIM remains the long-term product source of truth — blocked pending infra/import (Patrick).
 
