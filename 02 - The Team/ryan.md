@@ -1,28 +1,24 @@
 # 👤 Ryan — Software Engineer (Solo Developer)
 
-**Rôle** : Couche applicative fullstack complète.
+**Rôle** : Couche applicative fullstack — seul développeur sur le chantier de modernisation.
 
-## Responsabilités
+## Périmètre
 
-- Ownership complet de la couche applicative : architecture,
-  choix techniques, implémentation, maintenance
-- Refonte frontend intégrale : UI/UX, composants réutilisables,
-  responsive, performances, SEO et accessibilité
-- Conception et développement de l'API Go (Chi) :
-  intégration ERP Ogasys, catalogue 500k → 2M pièces,
-  pagination, filtres, recherche performante
-- Mise en place CI/CD et bonnes pratiques qualité
-- Migration progressive sans interruption de service
-- Collaboration étroite avec Patrick sur les environnements,
-  déploiements et sécurité
+- Architecture, choix techniques, implémentation et maintenance de l'app
+- Frontend Next.js : UI/UX, composants, responsive, perf, SEO, accessibilité
+- API Go (Chi) : auth, catalogue, checkout, commandes, factures, intégrations ERP / PartSmart / UnoPIM
+- Migration progressive (strangler fig) sans interruption de service
+- Qualité : tests, documentation, scopes livrables un commit à la fois
 
-## Relation de travail
+## Collaboration avec Patrick
 
-| Aspect | Patrick (Admin Sys) | Ryan (Ingénieur Fullstack) |
+Décisions techniques conjointes. Ryan porte le code ; Patrick porte l'infra, les accès sensibles et les pipelines de déploiement.
+
+| Aspect | Patrick | Ryan |
 |---|---|---|
-| Périmètre | Infra, sécurité, Ops | App, frontend, intégrations |
-| Décisions | Conjointes (technique) | Conjointes (technique) |
-| Livrables communs | Environnements, CI/CD | App déployable |
+| Périmètre | Infra, sécurité, ops, UnoPIM côté serveur | App, intégrations, UX |
+| Environnements | Provisionnement dev / staging / prod | Consommation et feedback terrain |
+| Bloquants typiques | OAuth PIM, import catalogue, accès ERP prod | Déblocage app dès que l'infra suit |
 
 ---
 

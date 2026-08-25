@@ -24,7 +24,7 @@ The scale:
 
 This repo is where I document the journey publicly, day by day.
 
-Technical READMEs live in the code repos — this vault is the **human narrative**, not the API spec.
+Technical specs and implementation details live in private code repos — this vault is the **human narrative**, not the API spec.
 
 ---
 
@@ -49,7 +49,7 @@ Technical READMEs live in the code repos — this vault is the **human narrative
 midbec-journey/
 ├── 01 - Context/
 │   ├── mission.md            # Role, timeline, responsibilities
-│   └── stack.md              # High-level stack (sync with code READMEs periodically)
+│   └── stack.md              # High-level stack (revalidate after major changes)
 ├── 02 - The Team/
 │   ├── ryan.md
 │   └── patrick.md            # Infra / DevOps
@@ -64,18 +64,9 @@ midbec-journey/
 
 **Recommended reading order:**
 1. [`01 - Context/mission.md`](./01%20-%20Context/mission.md) — why this project exists
-2. [`01 - Context/stack.md`](./01%20-%20Context/stack.md) — stack overview (may lag code — see code READMEs)
+2. [`01 - Context/stack.md`](./01%20-%20Context/stack.md) — stack overview
 3. Pick any daily log in [`03 - Daily Logs/`](./03%20-%20Daily%20Logs/) — see the work in practice
 4. Check the scopes table below — track overall progress
-
-**Code repos (source of truth for architecture):**
-
-| Repo | README |
-|---|---|
-| Next.js storefront | [midbec-front](../midbec-front/README.md) |
-| Go API | [midbec-go-api](../midbec-go-api/README.md) |
-
-UnoPIM integration details: [`midbec-go-api/docs/unopim-catalogue.md`](../midbec-go-api/docs/unopim-catalogue.md)
 
 ---
 
@@ -114,7 +105,7 @@ UnoPIM integration details: [`midbec-go-api/docs/unopim-catalogue.md`](../midbec
 
 ## 🛠️ Stack
 
-Full details in [`stack.md`](./01%20-%20Context/stack.md) — revalidate against code READMEs after major changes.
+Full details in [`stack.md`](./01%20-%20Context/stack.md).
 
 | Layer | Tech |
 |---|---|
