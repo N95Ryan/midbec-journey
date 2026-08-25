@@ -28,18 +28,22 @@ Technical specs and implementation details live in private code repos — this r
 
 ---
 
-## 📊 Impact (in progress)
+## 📊 Impact
 
-| Metric | Before | After |
+| Metric | Before (avril 2026, dev) | After (août 2026, build prod) |
 |---|---|---|
-| Lighthouse Performance | 55 | TBD |
-| Lighthouse Accessibility | 71 | TBD |
-| Lighthouse Best Practices | 96 | TBD |
-| Lighthouse SEO | 100 | TBD |
-| First Contentful Paint | 2.5s | TBD |
-| Total Blocking Time | 4,380ms ⚠️ | TBD |
+| Lighthouse Performance | 55 | 95 |
+| Lighthouse Accessibility | 71 | 73 |
+| Lighthouse Best Practices | 96 | 96 |
+| Lighthouse SEO | 100 | 100 |
+| First Contentful Paint | 2,5 s | 0,8 s |
+| Total Blocking Time | 4 380 ms ⚠️ | 20 ms |
 
-> Baseline measured pre-Bootstrap/SCSS removal. Scores will be updated post-migration.
+*Mesures Desktop, page d'accueil `/fr`, Chrome DevTools + Lighthouse CLI headless, build production (`bun run build` + `bun run start`), 25 août 2026.*
+
+*Nuance méthodologique : la baseline a été mesurée en mode développement (`next dev`), les résultats After en build production. Le gain observé combine l'effet de la migration CSS (Bootstrap/SCSS → Tailwind) et l'effet du mode de build. Une mesure intermédiaire fin avril (nettoyage CSS partiel, toujours en dev) situait la Perf Desktop autour de 87, ce qui isole une partie de l'effet migration indépendamment du build.*
+
+*Sur mobile, le gain de Performance est marginal (53 après vs 55 avant) : le goulot d'étranglement mobile n'est pas le CSS mais le JS main thread et le chargement des images (LCP catalogue/accueil à 5+ s). Chantier de suivi identifié.*
 
 ---
 
