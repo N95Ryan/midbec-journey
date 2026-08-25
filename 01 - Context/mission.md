@@ -54,5 +54,5 @@ pour un catalogue en croissance de 500k vers 2 millions de pièces.
 
 ## 🔗 Liens
 
-- [[stack]] — Stack technique
-- [[patrick]] · [[ryan]] — Équipe
+- [stack.md](./stack.md) — Stack technique
+- [patrick.md](../02%20-%20The%20Team/patrick.md) · [ryan.md](../02%20-%20The%20Team/ryan.md) — Équipe

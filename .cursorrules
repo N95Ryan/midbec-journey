@@ -1,13 +1,21 @@
-# Obsidian Daily Logs — Règles Cursor
+# Daily Logs — Règles Cursor (midbec-journey)
+
+Repo public : https://github.com/N95Ryan/midbec-journey
 
 ## Format obligatoire pour toute note daily log
 
-Chaque note générée ou modifiée dans `03-Daily-Logs/` doit respecter
+Chaque note générée ou modifiée dans `03 - Daily Logs/` doit respecter
 strictement ce format, dans cet ordre :
 
 ---
 
-# 📅 Jour Mois Année — Titre court de la journée
+# 📅 [Jour] JJ mois AAAA - Titre descriptif
+
+Exemple : `# 📅 Lundi 24 août 2026 - Tri du board et préparation des mesures perf`
+
+Nom de fichier : `YYYY-MM-DD.md` (ex. `2026-08-24.md`).
+
+---
 
 ## 🧠 Humeur & contexte
 
@@ -76,6 +84,8 @@ Pas de note chiffrée (pas de X/10).]
   d'une explication généralisable.
 - Ne jamais inventer de contenu technique absent des informations fournies.
 - Toujours restructurer, jamais réécrire le contenu existant.
+- Liens internes : chemins Markdown relatifs (`../01 - Context/stack.md`),
+  pas de wikilinks Obsidian (`[[stack]]`).
 
 ---
 
@@ -91,6 +101,7 @@ Pas de note chiffrée (pas de X/10).]
 - Ports locaux (`localhost:8080`, `:3000`, etc.)
 - Noms de fichiers internes (`pim.server.ts`, `pim-smoke.sh`, `headerDepartments.ts`, etc.)
 - Noms de collègues, sauf **Patrick** (seul nom autorisé explicitement)
+- Numéros de tickets Trello (`#71`, etc.)
 
 ✅ **Autorisé :**
 - Le prénom **Patrick** uniquement parmi les collègues
@@ -107,11 +118,16 @@ placeholder descriptif entre crochets (`[PIM_BASE_URL]`, `[script smoke]`,
 
 ---
 
-## Format de commit pour les notes Obsidian
+## Format de commit
 
+```
 git add .
-git commit -m "Ajout de la note du JOUR MOIS ANNÉE"
+git commit -m "chore/journey : 'description courte'"
+git push
+```
 
-Exemples :
-git add .
-git commit -m "Ajout de la note du 5 Mai 2026"
+Pour une note du jour seule :
+
+```
+git commit -m "chore/journey : 'note du 25 août 2026'"
+```

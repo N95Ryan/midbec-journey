@@ -22,4 +22,4 @@ Décisions techniques conjointes. Ryan porte le code ; Patrick porte l'infra, le
 
 ---
 
-**Liens** : [[mission]] · [[stack]] · [[patrick]]
+**Liens** : [mission.md](../01%20-%20Context/mission.md) · [stack.md](../01%20-%20Context/stack.md) · [patrick.md](./patrick.md)

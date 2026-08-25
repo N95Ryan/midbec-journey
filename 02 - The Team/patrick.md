@@ -19,4 +19,4 @@
 
 ---
 
-**Liens** : [[mission]] · [[stack]] · [[ryan]]
+**Liens** : [mission.md](../01%20-%20Context/mission.md) · [stack.md](../01%20-%20Context/stack.md) · [ryan.md](./ryan.md)

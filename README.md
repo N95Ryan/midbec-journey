@@ -24,7 +24,7 @@ The scale:
 
 This repo is where I document the journey publicly, day by day.
 
-Technical specs and implementation details live in private code repos — this vault is the **human narrative**, not the API spec.
+Technical specs and implementation details live in private code repos — this repo is the **human narrative**, not the API spec.
 
 ---
 
