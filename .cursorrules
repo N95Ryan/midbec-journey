@@ -9,9 +9,16 @@ strictement ce format, dans cet ordre :
 
 ---
 
-# 📅 [Jour] JJ mois AAAA - Titre descriptif
+# 📅 [Jour] JJ Mois AAAA - Titre descriptif
 
-Exemple : `# 📅 Lundi 24 août 2026 - Tri du board et préparation des mesures perf`
+Exemple : `# 📅 Jeudi 27 Août 2026 - Export de démo et refonte de la page d'accueil`
+
+Règles du titre :
+- Toujours un titre H1 markdown (`# ` en tête de ligne)
+- Emoji calendrier obligatoire (`📅`)
+- Jour de la semaine avec majuscule initiale (ex. `Jeudi`)
+- Mois avec majuscule initiale (ex. `Août`, `Juillet`, `Mars`)
+- Séparateur date / titre : ` - ` (espace, tiret, espace)
 
 Nom de fichier : `YYYY-MM-DD.md` (ex. `2026-08-24.md`).
 
