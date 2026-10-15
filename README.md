@@ -100,6 +100,8 @@ midbec-journey/
 | 20 | Invoices pipeline — list + download API | 🟡 Shipped Jul (UI + API) — `/test` E2E probe blocked |
 | 21 | Front hygiene — quickview removal, megamenu i18n, audit triage | ✅ Done (Aug 12–13) |
 | 22 | Homepage → ERP carousels + static checkout countries | ✅ Done (Aug 13) — legacy homepage audit pending |
+| 23 | Wishlist auth gate (connectés seulement, local Redux) | ✅ Done (Oct) — MR !44 |
+| 24 | Wishlist persistence (API PostgreSQL, suit le compte) | 🟡 MR en cours — `feat/wishlist-api` + `wip/wishlist-persistance-v2` ; table `wishlist_items` côté DBA |
 
 > **Active catalog:** ERP (`NEXT_PUBLIC_CATALOG_SOURCE=erp`). UnoPIM remains the long-term product source of truth — blocked pending infra/import (Patrick).
 
@@ -117,6 +119,7 @@ Full details in [`stack.md`](./01%20-%20Context/stack.md).
 | Frontend state | Redux Toolkit (8 slices) · TanStack Query v5 · Zustand migration planned |
 | Backend | Go 1.25 · Chi · PostgreSQL (pgx, raw SQL) |
 | Backend pattern | Handlers → ERP/PIM clients → repositories (no service layer) |
+| Wishlist | PostgreSQL `wishlist_items` per `web_user_id` + SKU — no dev in-memory fallback |
 | PIM | UnoPIM (long-term product source of truth) |
 | ERP | Ogasys via Go API (active catalog + orders + pricing) |
 | i18n | next-intl (routing) + react-intl (UI strings) — FR / EN |
