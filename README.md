@@ -101,7 +101,7 @@ midbec-journey/
 | 21 | Front hygiene — quickview removal, megamenu i18n, audit triage | ✅ Done (Aug 12–13) |
 | 22 | Homepage → ERP carousels + static checkout countries | ✅ Done (Aug 13) — legacy homepage audit pending |
 | 23 | Wishlist auth gate (connectés seulement, local Redux) | ✅ Done (Oct) — MR !44 |
-| 24 | Wishlist persistence (API PostgreSQL, suit le compte) | 🟡 MR en cours — `feat/wishlist-api` + `wip/wishlist-persistance-v2` ; table `wishlist_items` côté DBA |
+| 24 | Wishlist persistence (API PostgreSQL, suit le compte) | 🟡 Code fusionné sur develop (oct.) — table `wishlist_items` + handoff DBA ; smoke multi-appareil après CREATE |
 
 > **Active catalog:** ERP (`NEXT_PUBLIC_CATALOG_SOURCE=erp`). UnoPIM remains the long-term product source of truth — blocked pending infra/import (Patrick).
 
